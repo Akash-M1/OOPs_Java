@@ -9,21 +9,21 @@ class Account{
 		this.name = name;
 		this.accountno = accountno;
 		this.typeAcc = typeAcc;
-		balance=500;
+		this.balance=500;
 		sc= new Scanner(System.in);
 	}
 	public void Display(){
 		System.out.println("**********Account Details*********");
-		System.out.println("Name of Customer : "+name);
-		System.out.println("Account number : "+accountno);
-		System.out.println("Type of Account : "+typeAcc);
+		System.out.println("Name of Customer : "+this.name);
+		System.out.println("Account number : "+this.accountno);
+		System.out.println("Type of Account : "+this.typeAcc);
 	}
 	public void Accept(){
 		System.out.println("Enter the amount to be deposited");
 		int amount = sc.nextInt();
 		this.balance += amount;
 		System.out.println("Succesfully Credited ");
-		System.out.println("Available Balance : "+balance);
+		System.out.println("Available Balance : "+this.balance);
 
 	}
 	public void permit(){
@@ -46,7 +46,6 @@ class Curr_Acct extends Account{
 	}
 	public void Display(){
 		super.Display();
-		compute();
 		System.out.println("Balance : "+super.balance);
 		System.out.println("**********Thank You*********");
 	}
@@ -56,6 +55,10 @@ class Curr_Acct extends Account{
 			System.out.println("Due to low balance fine of 100rs has been applied");
 		}
 		return;
+	}
+	public void permit(){
+		super.permit();
+		compute();
 	}
 	public void cheque(){
 		System.out.println("Cheque book services available");
@@ -68,11 +71,10 @@ class Sav_Acct extends Account{
 	}
 	public void Display(){
 		super.Display();
-		compute();
 		System.out.println("Balance : "+super.balance);
 		System.out.println("**********Thank You*********");
 	}
-	private void compute(){
+	public void compute(){
 		System.out.println("Enter the the time lapse after the Account creation(in months)");
 		int time=sc.nextInt();
 		double t=time/12.0;
@@ -134,7 +136,8 @@ public class Bank{
 				System.out.println("2-Debit");
 				System.out.println("3-Display Balance");
 				System.out.println("4-Cheque book Available");
-				System.out.println("5-Exit from Bank");
+				System.out.println("5-Compute intrest of your balance");
+				System.out.println("6-Exit from Bank");
 				int ch=sc.nextInt();
 				switch(ch){
 					case 1:
@@ -150,6 +153,9 @@ public class Bank{
 					sa1.cheque();
 					break;
 					case 5:
+					sa1.compute();
+					break;
+					case 6:
 					System.out.println("Thank You visit again");
 					System.exit(0);
 					default:
